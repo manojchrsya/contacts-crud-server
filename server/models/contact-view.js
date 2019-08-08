@@ -2,7 +2,6 @@ const moment = require('moment');
 const _ = require('lodash');
 
 module.exports = function (ContactView) {
-
   ContactView.updateView = function (instance) {
     return ContactView.findOrCreate({
       where: {
@@ -23,4 +22,4 @@ module.exports = function (ContactView) {
         });
       });
   };
-}
+};

@@ -1,3 +1,3 @@
-module.exports = function (FileContainer) {
+module.exports = function () {
 
 };

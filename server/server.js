@@ -7,7 +7,7 @@ const boot = require('loopback-boot');
 const app = module.exports = loopback();
 
 app.start = function () {
-  app.use('/uploads', loopback.static('uploads'))
+  app.use('/uploads', loopback.static('uploads'));
   // start the web server
   return app.listen(() => {
     app.emit('started');
