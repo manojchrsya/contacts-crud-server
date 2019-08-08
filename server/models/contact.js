@@ -51,10 +51,6 @@ module.exports = function (Contact) {
     return Contact.app.get('filesystem').container;
   };
 
-  Contact.prototype.getImagePath = function () {
-    return _.join([Contact.getFileBucket(), Contact.modelName.toLowerCase(), this.id, 'profile'], '/');
-  };
-
   Contact.prototype.uploadPicture = function (ctx) {
     const options = {
       getFilename: Contact.getFilename,
@@ -83,10 +79,11 @@ module.exports = function (Contact) {
           try {
             await Promise.all([
               FileContainer.removeFile(Contact.getFileBucket(), profile.name),
-              FileStorage.deleteById(profile.id)
+              FileStorage.deleteById(profile.id),
             ]);
-          } catch (error) {
-            console.error(error.message);
+          } catch (err) {
+            // eslint-disable-next-line no-console
+            console.error(err.message);
           }
           return Promise.resolve();
         });
@@ -128,8 +125,7 @@ module.exports = function (Contact) {
     });
   };
 
-  Contact.prototype.updateView = function (ctx) {
-    console.log(this);
+  Contact.prototype.updateView = function () {
     return ContactView.updateView({
       customerId: this.customerId,
       contactId: this.id,
@@ -147,5 +143,4 @@ module.exports = function (Contact) {
     },
     http: { verb: 'post' },
   });
-
 };
